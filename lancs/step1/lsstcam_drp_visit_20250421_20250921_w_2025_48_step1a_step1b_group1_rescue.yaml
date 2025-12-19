@@ -23,7 +23,7 @@ computeSite: LANCS
 requestMemory: 4000
 memoryMultiplier: 2
 
-extraQgraphOptions: "--dataset-query-constraint raw --clobber-outputs --select-tasks calibrateImage,consolidateSingleVisitStar,consolidateVisitSummary"
+extraQgraphOptions: "--dataset-query-constraint raw"
 
 pipetask:
   pipetaskInit:
