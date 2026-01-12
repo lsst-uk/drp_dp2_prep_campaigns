@@ -23,12 +23,14 @@ computeSite: LANCS
 requestMemory: 4000
 memoryMultiplier: 2
 
-extraQgraphOptions: "--dataset-query-constraint preliminary_visit_summary,isolated_star,single_visit_star"
+extraQgraphOptions: "--clobber-outputs --skip-existing-in {output} --dataset-query-constraint preliminary_visit_summary,isolated_star,single_visit_star"
 
-#pipetask:
-#  pipetaskInit:
-#    requestMemory: 64000
-#    numberOfRetries: 3
+pipetask:
+  pipetaskInit:
+    requestMemory: 64000
+    numberOfRetries: 3
+  gbdesHealpix3AstrometricFit:
+    requestMemory: 125000
 
 finalJob:
   requestCpus: 10

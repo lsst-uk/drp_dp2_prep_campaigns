@@ -1,0 +1,40 @@
+includeConfigs:
+- ${CTRL_BPS_PANDA_DIR}/config/bps_panda_DF.yaml
+- ${CTRL_BPS_PANDA_DIR}/config/bps_remote.yaml
+- ${DRP_PIPE_DIR}/bps/clustering/LSSTCam/DRP-clustering.yaml
+- ${DRP_PIPE_DIR}/bps/resources/LSSTCam/DRP.yaml
+  #- ${DRP_PIPE_DIR}/bps/caching/LSSTCam/usdf/DRP-caching.yaml
+
+LSST_VERSION: w_2025_48
+ 
+pipelineYaml: "${DRP_PIPE_DIR}/pipelines/LSSTCam/DRP.yaml#step2a-recalibrate-global,step2c-recalibrate-healpix"
+
+payload:
+  runInit: true
+  payloadName: lsstcam_drp
+  butlerConfig: davs://xgate.hec.lancs.ac.uk:1094/cephfs/grid/lsst/repos/dp2_prep
+  inCollection: LSSTCam/raw/DM-53155,LSSTCam/calib,LSSTCam/calib/DM-51669/unbounded,refcats,skymaps,pretrained_models,LSSTCam/calib/fgcmcal
+  output: LSSTCam/runs/DRP/20250527-20250921/w_2025_48/DM-53155
+  dataQuery: "instrument='LSSTCam' and skymap='lsst_cells_v1'"
+  
+numberOfRetries: 6
+
+computeSite: LANCS
+requestMemory: 4000
+memoryMultiplier: 2
+
+extraQgraphOptions: "--dataset-query-constraint preliminary_visit_summary,isolated_star,single_visit_star"
+
+#pipetask:
+#pipetaskInit:
+#requestMemory: 64000
+#numberOfRetries: 3
+
+finalJob:
+  requestCpus: 10
+  requestMemory: 48000
+  numberOfRetries: 10
+
+extraRunQuantumOptions: "--no-raise-on-partial-outputs"
+
+#enableJobNameMap: true
